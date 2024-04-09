@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Website</title>
+</head>
+<script>
+    function setCookie(cName, cValue, exDays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cName + "=" + cValue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cName) {
+        let name = cName + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookie() {
+        let user = getCookie("username");
+        if (user !== "") {
+            alert("Welcome again " + user);
+        } else {
+            user = prompt("Please enter your name:", "");
+            if (user !== "" && user != null) {
+                setCookie("username", user, 365);
+            }
+        }
+    }
+</script>
+<body onload="checkCookie()">
+
+</body>
+<footer>
+    <p>&copy; 2024, due date 4/9 Tobey Chan</p>
+</footer>
+</html>
